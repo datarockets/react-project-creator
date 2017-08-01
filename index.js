@@ -1,20 +1,38 @@
-import inquirer from 'inquirer';
-import fs       from 'fs';
+import yaml from 'js-yaml';
+import fs   from 'fs';
+import _    from 'lodash';
 
-const QUESTIONS = [
-  {
-    name: 'project-name',
-    type: 'input',
-    message: 'Project name:',
-    validate: (input) => {
-      if (/^([A-Za-z\-\_\d])+$/.test(input)) return true;
-      else return 'Project name may only include letters, numbers, underscores and hashes.';
-    },
-  },
-];
+const yamlFile  = fs.readFileSync('structure.yml', 'utf8');
+const structure = yaml.safeLoad(yamlFile);
 
-inquirer
-  .prompt(QUESTIONS)
-  .then((answers) => {
-    console.log(answers);
+traverse(structure);
+
+function traverse(object, pathsList = []) {
+  const keys = _.keys(object);
+
+  keys.forEach((key) => {
+    const entity = object[key];
+
+    if (_.isObject(entity)) {
+      traverse(entity);
+    }
+
+    if (_.isString(entity)) {
+      createFile(key, entity);
+    }
+
+    createFolder(key);
   });
+}
+
+function createFolder(folderName) {
+  console.log(folderName);
+}
+
+function createFile(fileName, template) {
+  console.log(fileName, template);
+}
+
+function constructPath(pathsList) {
+  return `${__dirname}/${pathsList.join('/')}`;
+}
