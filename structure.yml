@@ -1,0 +1,14 @@
+components
+layouts
+pages
+ui
+containers
+routes
+models
+utils
+redux
+  actions
+  reducers
+  sagas
+  thunk
+  store.js
