@@ -11,17 +11,19 @@ function traverse(object, pathsList = []) {
   const keys = _.keys(object);
 
   keys.forEach((key) => {
-    const entity = object[key];
+    const entity       = object[key];
+    const previousPath = constructPath(pathsList);
+    const currentPath  = `${previousPath}/${key}`;
 
     if (_.isObject(entity)) {
-      traverse(entity);
+      traverse(entity, pathsList.concat([key]));
     }
 
     if (_.isString(entity)) {
-      createFile(key, entity);
+      createFile(currentPath, entity);
     }
 
-    createFolder(key);
+    createFolder(currentPath);
   });
 }
 
@@ -34,5 +36,5 @@ function createFile(fileName, template) {
 }
 
 function constructPath(pathsList) {
-  return `${__dirname}/${pathsList.join('/')}`;
+  return `${pathsList.join('/')}`;
 }
