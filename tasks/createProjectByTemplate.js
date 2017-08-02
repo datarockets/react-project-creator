@@ -1,5 +1,5 @@
-import fs from 'fs';
-import _  from 'lodash';
+const fs = require('fs');
+const _  = require('lodash');
 
 function getSetupValues() {
   const currentDir   = process.cwd();
@@ -9,7 +9,7 @@ function getSetupValues() {
   return { currentDir, projectName, templatePath };
 }
 
-function createDirectory(currentDir, projectName) {
+function createProjectDirectory(currentDir, projectName) {
   fs.mkdirSync(`${currentDir}/${projectName}`);
 }
 
@@ -34,9 +34,15 @@ function createDirectoryContents(templatePath, newProjectPath, currentDir) {
   });
 }
 
-export default function run() {
+function run() {
   const { currentDir, projectName, templatePath } = getSetupValues();
 
-  // createDirectory(currentDir, projectName);
+  if (!projectName) {
+    throw new Error('You should provide a name for a project');
+  }
+
+  createProjectDirectory(currentDir, projectName);
   createDirectoryContents(templatePath, projectName, currentDir);
 }
+
+exports.createProjectByTemplate = run;

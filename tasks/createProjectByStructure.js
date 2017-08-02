@@ -36,3 +36,14 @@ function createFile(fileName, template) {
 function constructPath(pathsList) {
   return `${pathsList.join('/')}`;
 }
+
+function createProjectDirectory(currentDir, projectName) {
+  fs.mkdirSync(`${currentDir}/${projectName}`);
+}
+
+export default function run() {
+  const { currentDir, projectName, templatePath } = getSetupValues();
+
+  createProjectDirectory(currentDir, projectName);
+  createDirectoryContents(templatePath, projectName, currentDir);
+}

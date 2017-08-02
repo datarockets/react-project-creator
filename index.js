@@ -1,3 +1,3 @@
-import createProjectByTemplate from './tasks/createProjectByTemplate';
+const { createProjectByTemplate } = require('./tasks/createProjectByTemplate');
 
 createProjectByTemplate();
