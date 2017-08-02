@@ -37,6 +37,6 @@ function createDirectoryContents(templatePath, newProjectPath, currentDir) {
 export default function run() {
   const { currentDir, projectName, templatePath } = getSetupValues();
 
-  createDirectory(currentDir, projectName);
+  // createDirectory(currentDir, projectName);
   createDirectoryContents(templatePath, projectName, currentDir);
 }
