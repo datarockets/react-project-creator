@@ -11,4 +11,4 @@ redux:
   reducers:
   sagas:
   thunk:
-  store.js: StoreTemplate
+  store.js:
