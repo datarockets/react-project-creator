@@ -1,3 +1,3 @@
-const cmd = require('node-cmd');
+const { createProjectByTemplate } = require('./tasks/createProjectByTemplate');
 
-cmd.get('pwd', (err, data) => console.log('Current directory is: ', data));
+createProjectByTemplate();
