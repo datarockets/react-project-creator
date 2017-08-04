@@ -10,7 +10,7 @@
     "start": "node index.js"
   },
   "bin": {
-    "react-up": "node index.js"
+    "react-up": "./index.js"
   },
   "dependencies": {
     "clui": "^0.3.6",
