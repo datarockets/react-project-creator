@@ -33,19 +33,12 @@ async function setupDependencies() {
   await runCommand(devDependenciesAddCommand);
 }
 
-async function addTrackingByGit() {
-  await runCommand('git add .');
-  await runCommand('git commit -m "Initial commit"');
-}
-
 async function run(projectName) {
   await process.chdir(`./${projectName}`);
 
   await setupYarn();
   await setupGit();
   await setupDependencies();
-
-  await addTrackingByGit();
 
   await process.chdir(`..`);
   console.log('Ready!');
