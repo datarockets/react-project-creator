@@ -1,6 +1,10 @@
 {
   "devDependencies": [
     "babel-eslint",
+    "babel-core",
+    "babel-loader",
+    "babel-preset-es2015",
+    "babel-preset-react",
     "enzyme",
     "eslint",
     "eslint-config-airbnb",

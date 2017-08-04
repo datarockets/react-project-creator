@@ -1,13 +1,22 @@
 const commander = require('commander');
+const git       = require('simple-git');
 const fs        = require('fs');
 
 const { runCommand } = require('./helpers/runCommand');
 
 function setupYarn() {
-  return runCommand('yarn init');
+  console.log('Initialize yarn');
+  return runCommand('yarn init --yes');
 }
 
 function setupGit() {
+  console.log('Initialize git');
+  // git
+  //   .init()
+  //   .add('.gitignore')
+  //   .add('./*')
+  //   .commit('Initial commit');
+
   return runCommand('git init');
 }
 
@@ -23,15 +32,23 @@ async function setupDependencies() {
   const devDependenciesString     = devDependencies.join(' ');
   const devDependenciesAddCommand = `yarn add --dev ${devDependenciesString}`;
 
+  console.log('Add dependencies');
   await runCommand(dependenciesAddCommand);
+
+  console.log('Add development dependencies');
   await runCommand(devDependenciesAddCommand);
 }
 
 async function run(projectName) {
+  await process.chdir(`./${projectName}`);
+
   await setupYarn();
   await setupGit();
 
   await setupDependencies();
+
+  await process.chdir(`..`);
+  console.log('Ready!');
 }
 
 exports.runSetupCommands = run;

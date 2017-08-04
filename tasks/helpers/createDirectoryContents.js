@@ -7,6 +7,10 @@ function createDirectoryContents(templatePath, newProjectPath, currentDir) {
     const originFilePath = `${templatePath}/${file}`;
     const stats          = fs.statSync(originFilePath);
 
+    if (file === '.gitkeep') {
+      return;
+    }
+
     if (stats.isFile()) {
       const contents = fs.readFileSync(originFilePath, 'utf8');
       const writePath = `${currentDir}/${newProjectPath}/${file}`;

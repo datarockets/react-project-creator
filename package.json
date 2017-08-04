@@ -10,15 +10,17 @@
     "start": "node index.js"
   },
   "bin": {
-    "react-up": "./index.js"
+    "react-up": "node index.js"
   },
   "dependencies": {
+    "clui": "^0.3.6",
     "commander": "^2.11.0",
     "inquirer": "^3.2.1",
     "js-yaml": "^3.9.1",
     "lodash": "^4.17.4",
     "node-cmd": "^3.0.0",
-    "node-yaml": "^3.1.0"
+    "node-yaml": "^3.1.0",
+    "simple-git": "^1.75.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
