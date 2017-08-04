@@ -1,4 +1,5 @@
-const fs = require('fs');
+const fs       = require('fs');
+const beautify = require('js-beautify');
 
 const SCRIPTS = {
   "start": "WEBPACK_CONFIG_PATH=./config/webpack.config.js webpack-dev-server --progress",
@@ -9,21 +10,25 @@ function read(projectName) {
 }
 
 function update(packageObject) {
-  return Object.assign({}, packageObject, { scripts: Object.assign({}, packageObject, SCRIPTS) });
+  return Object.assign({}, packageObject, {
+    scripts: Object.assign({}, packageObject.scripts, SCRIPTS),
+  });
 }
 
 function write(projectName, nextPackageJson) {
-  fs.writeFileSync(`${projectName}/package.json`, nextPackageJson, 'utf8');
+  fs.writeFileSync(`${projectName}/package.json`, nextPackageJson);
 }
 
 function run(projectName) {
-  const packageJson       = read(projectName);
-  const packageObject     = JSON.parse(packageJson);
-
-  const nextPackageObject = update(packageObject);
-  const nextPackageJson   = JSON.stringify(packageJson);
-
-  write(projectName, nextPackageJson);
+  Promise.resolve(projectName)
+    .then(read)
+    .then(JSON.parse)
+    .then(update)
+    .then(JSON.stringify)
+    .then((nextPackageJson) => {
+      return beautify(nextPackageJson, { indent_size: 2, end_with_newline: true })
+    })
+    .then(write.bind(null, projectName));
 }
 
 exports.patchPackageJson = run;
