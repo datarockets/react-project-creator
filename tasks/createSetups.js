@@ -25,7 +25,7 @@ function addConfigs(currentDir, projectName) {
   CONFIGS_LIST.forEach(({ fileName, configName }) => {
     const originFilePath = `${__dirname}/config/${configName}`
     const contents       = fs.readFileSync(originFilePath, 'utf8');
-    const writePath      = `${currentDir}/${projectName}/config/${fileName}`;
+    const writePath      = `${currentDir}/${projectName}/${fileName}`;
 
     fs.writeFileSync(writePath, contents, 'utf8');
   });
