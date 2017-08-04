@@ -1,5 +1,7 @@
 const { createProjectByTemplate } = require('./tasks/createProjectByTemplate');
 const { createSetups }            = require('./tasks/createSetups');
 
-createProjectByTemplate();
-createSetups();
+const projectName  = process.argv[2];
+
+createProjectByTemplate(projectName);
+createSetups(projectName);

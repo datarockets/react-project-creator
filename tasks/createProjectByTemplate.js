@@ -3,23 +3,21 @@ const fs = require('fs');
 const { createDirectoryContents } = require('./helpers/createDirectoryContents');
 
 function getSetupValues() {
-  const currentDir   = process.cwd();
-  const projectName  = process.argv[2];
+  const currentDir = process.cwd();
 
   const frontProjectTemplatePath = `${__dirname}/templates/front-js-project`;
   const reactProjectTemplatePath = `${__dirname}/templates/react-redux-project`;
 
-  return { currentDir, projectName, frontProjectTemplatePath, reactProjectTemplatePath };
+  return { currentDir, frontProjectTemplatePath, reactProjectTemplatePath };
 }
 
 function createProjectDirectory(currentDir, projectName) {
   fs.mkdirSync(`${currentDir}/${projectName}`);
 }
 
-function run() {
+function run(projectName) {
   const {
     currentDir,
-    projectName,
     frontProjectTemplatePath,
     reactProjectTemplatePath,
   } = getSetupValues();
