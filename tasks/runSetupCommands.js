@@ -11,17 +11,11 @@ function setupYarn() {
 
 function setupGit() {
   console.log('Initialize git');
-  // git
-  //   .init()
-  //   .add('.gitignore')
-  //   .add('./*')
-  //   .commit('Initial commit');
-
   return runCommand('git init');
 }
 
 async function setupDependencies() {
-  const dependenciesListPath = `${__dirname}/templates/setups/dependencies.json`;
+  const dependenciesListPath = `${__dirname}/config/dependencies.json`;
   const dependenciesListJson = fs.readFileSync(dependenciesListPath);
 
   const { dependencies, devDependencies } = JSON.parse(dependenciesListJson);
@@ -39,13 +33,19 @@ async function setupDependencies() {
   await runCommand(devDependenciesAddCommand);
 }
 
+async function addTrackingByGit() {
+  await runCommand('git add .');
+  await runCommand('git commit -m "Initial commit"');
+}
+
 async function run(projectName) {
   await process.chdir(`./${projectName}`);
 
   await setupYarn();
   await setupGit();
-
   await setupDependencies();
+
+  await addTrackingByGit();
 
   await process.chdir(`..`);
   console.log('Ready!');
