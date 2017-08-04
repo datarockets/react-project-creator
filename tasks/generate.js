@@ -3,11 +3,11 @@ const { createSetups }            = require('./createSetups');
 const { runSetupCommands }        = require('./runSetupCommands');
 const { patchPackageJson }        = require('./patchPackageJson');
 
-function run(projectName) {
-  createProjectByTemplate(projectName);
-  createSetups(projectName);
-  runSetupCommands(projectName);
-  patchPackageJson(projectName);
+async function run(projectName) {
+  await createProjectByTemplate(projectName);
+  await createSetups(projectName);
+  await runSetupCommands(projectName);
+  await patchPackageJson(projectName);
 }
 
 exports.generate = run;

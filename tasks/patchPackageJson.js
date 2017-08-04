@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const SCRIPTS = {
   "start": "WEBPACK_CONFIG_PATH=./config/webpack.config.js webpack-dev-server --progress",
 };
@@ -7,13 +9,7 @@ function read(projectName) {
 }
 
 function update(packageObject) {
-  return {
-    ...packageObject,
-    scripts: {
-      ..packageObject,
-      ...SCRIPTS,
-    },
-  };
+  return Object.assign({}, packageObject, { scripts: Object.assign({}, packageObject, SCRIPTS) });
 }
 
 function write(projectName, nextPackageJson) {
@@ -25,7 +21,7 @@ function run(projectName) {
   const packageObject     = JSON.parse(packageJson);
 
   const nextPackageObject = update(packageObject);
-  const nextPackageJson   = JSON.serialize(packageJson);
+  const nextPackageJson   = JSON.stringify(packageJson);
 
   write(projectName, nextPackageJson);
 }
