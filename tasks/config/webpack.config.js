@@ -20,6 +20,9 @@ module.exports = {
       },
     ],
   },
+  postcss: [
+    require('autoprefixer')
+  ],
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
