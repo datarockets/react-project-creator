@@ -1,48 +1,34 @@
 const fs = require('fs');
-const _  = require('lodash');
+
+const { createDirectoryContents } = require('./helpers/createDirectoryContents');
 
 function getSetupValues() {
-  const currentDir   = process.cwd();
-  const projectName  = process.argv[2];
-  const templatePath = `${__dirname}/templates/react-redux-project`;
+  const currentDir = process.cwd();
 
-  return { currentDir, projectName, templatePath };
+  const frontProjectTemplatePath = `${__dirname}/templates/front-js-project`;
+  const reactProjectTemplatePath = `${__dirname}/templates/react-redux-project`;
+
+  return { currentDir, frontProjectTemplatePath, reactProjectTemplatePath };
 }
 
 function createProjectDirectory(currentDir, projectName) {
   fs.mkdirSync(`${currentDir}/${projectName}`);
 }
 
-function createDirectoryContents(templatePath, newProjectPath, currentDir) {
-  const filesToCreate = fs.readdirSync(templatePath);
-
-  filesToCreate.forEach((file) => {
-    const originFilePath = `${templatePath}/${file}`;
-    const stats = fs.statSync(originFilePath);
-
-    if (stats.isFile()) {
-      const contents = fs.readFileSync(originFilePath, 'utf8');
-      const writePath = `${currentDir}/${newProjectPath}/${file}`;
-
-      fs.writeFileSync(writePath, contents, 'utf8');
-    }
-
-    if (stats.isDirectory()) {
-      fs.mkdirSync(`${currentDir}/${newProjectPath}/${file}`);
-      createDirectoryContents(`${templatePath}/${file}`, `${newProjectPath}/${file}`, currentDir);
-    }
-  });
-}
-
-function run() {
-  const { currentDir, projectName, templatePath } = getSetupValues();
+function run(projectName) {
+  const {
+    currentDir,
+    frontProjectTemplatePath,
+    reactProjectTemplatePath,
+  } = getSetupValues();
 
   if (!projectName) {
     throw new Error('You should provide a name for a project');
   }
 
   createProjectDirectory(currentDir, projectName);
-  createDirectoryContents(templatePath, projectName, currentDir);
+  createDirectoryContents(frontProjectTemplatePath, projectName, currentDir);
+  createDirectoryContents(reactProjectTemplatePath, `${projectName}/src`, currentDir);
 }
 
 exports.createProjectByTemplate = run;

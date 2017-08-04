@@ -11,3 +11,27 @@ To generate the basic project structure use the following command
   node react-project-creator/index.js <project-name>
 
 ```
+
+## Project structure
+
+```
+<project-name>
+  config
+  public
+  resources
+  src
+    components
+      layouts
+      pages
+      ui
+    containers
+    routes
+    models
+    utils
+    redux
+      actions
+      reducers
+      sagas
+      thunk
+  
+```
