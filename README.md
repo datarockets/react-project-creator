@@ -8,7 +8,7 @@ To generate the basic project structure use the following command
 
 ```bash
 
-  node react-project-creator/index.js <project-name>
+  react-up <project-name>
 
 ```
 
@@ -33,5 +33,5 @@ To generate the basic project structure use the following command
       reducers
       sagas
       thunk
-  
+
 ```
