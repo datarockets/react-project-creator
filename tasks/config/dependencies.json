@@ -19,7 +19,8 @@
     "stylelint",
     "stylelint-config-datarockets",
     "stylelint-config-standard",
-    "webpack"
+    "webpack",
+    "webpack-dev-server",
   ],
   "dependencies": [
     "autoprefixer",
@@ -28,6 +29,8 @@
     "lokka-transport-http",
     "moment",
     "pluralize",
+    "style-loader",
+    "css-loader",
     "postcss-calc",
     "postcss-clearfix",
     "postcss-css-variables",
