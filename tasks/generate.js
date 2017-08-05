@@ -9,7 +9,7 @@ async function run(projectName) {
   await createSetups(projectName);
   await runSetupCommands(projectName);
   await patchPackageJson(projectName);
-  await addTrackingByGit();
+  await addTrackingByGit(projectName);
 }
 
 exports.generate = run;
