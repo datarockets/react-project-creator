@@ -19,15 +19,17 @@ function write(projectName, nextPackageJson) {
   fs.writeFileSync(`${projectName}/package.json`, nextPackageJson);
 }
 
-function run(projectName) {
-  Promise.resolve(projectName)
+function addIndentation(nextPackageJson) {
+  return beautify(nextPackageJson, { indent_size: 2, end_with_newline: true });
+}
+
+async function run(projectName) {
+  return Promise.resolve(projectName)
     .then(read)
     .then(JSON.parse)
     .then(update)
     .then(JSON.stringify)
-    .then((nextPackageJson) => {
-      return beautify(nextPackageJson, { indent_size: 2, end_with_newline: true })
-    })
+    .then(addIndentation)
     .then(write.bind(null, projectName));
 }
 
