@@ -23,5 +23,5 @@ function construct(componentName) {
   `;
 }
 
-exports.listOfFiles        = listOfFiles;
-exports.constructContainer = construct;
+exports.listOfFiles = listOfFiles;
+exports.construct   = construct;
