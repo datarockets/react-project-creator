@@ -12,4 +12,4 @@ async function run(projectName) {
   await addTrackingByGit(projectName);
 }
 
-exports.generate = run;
+exports.generateProject = run;
