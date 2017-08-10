@@ -2,6 +2,25 @@
 
 const program = require('commander');
 
-const projectName = process.argv[2];
+const { generateProject } = require('./tasks/generateProject');
+const { generateElement } = require('./tasks/generators/generateElement');
 
-require('./tasks/generateProject').generateProject(projectName);
+// The project structure generator
+program
+  .command('new [projectName]')
+  .description('Generate a new project')
+  .action((projectName) => {
+    generateProject(projectName);
+  });
+
+// The project elements generator
+program
+  .command('generate [elementType] [elementName]')
+  .description('Generate an element: component/container/model')
+  .action((elementType, elementName) => {
+    const path = ``;
+
+    generateElement(elementType, elementName, path);
+  });
+
+program.parse(process.argv);
