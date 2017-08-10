@@ -18,9 +18,7 @@ program
   .command('generate [elementType] [elementName]')
   .description('Generate an element: component/container/model')
   .action((elementType, elementName) => {
-    const path = ``;
-
-    generateElement(elementType, elementName, path);
+    generateElement(elementType, elementName);
   });
 
 program.parse(process.argv);

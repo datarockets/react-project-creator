@@ -3,24 +3,22 @@ const listOfFiles = [
 ];
 
 function construct(componentName) {
-  return `
-    import { connect } from 'react-redux';
-    import { bindActionCreators } from 'redux';
+  return `import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-    import actions from 'src/redux/actions';
+import actions from 'src/redux/actions';
 
-    import View from 'src/components/${componentName}';
+import View from 'src/components/${componentName}';
 
-    const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state, props) => ({
 
-    });
+});
 
-    const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
 
-    });
+});
 
-    export default connect(mapStateToProps, mapDispatchToProps)(View);
-  `;
+export default connect(mapStateToProps, mapDispatchToProps)(View);`;
 }
 
 exports.listOfFiles = listOfFiles;

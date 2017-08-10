@@ -4,22 +4,20 @@ const listOfFiles = [
 ];
 
 function construct(componentName) {
-  return `
-    import React, { Component, PropTypes } from 'react';
-    import styles from './styles.css';
+  return `import React, { Component, PropTypes } from 'react';
+import styles from './styles.css';
 
-    class ${componentName} extends Component {
-      static propTypes = {
+class ${componentName} extends Component {
+  static propTypes = {
 
-      }
+  }
 
-      render() {
-        return null;
-      }
-    }
+  render() {
+    return null;
+  }
+}
 
-    export default ${componentName};
-  `;
+export default ${componentName};`;
 }
 
 exports.listOfFiles = listOfFiles;
