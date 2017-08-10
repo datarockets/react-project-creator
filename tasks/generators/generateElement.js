@@ -73,7 +73,7 @@ function createFiles(elementName, elementType, path) {
   try {
     fs.mkdirSync(`${path}/${elementName}`);
   } catch (err) {
-    throw new Error('File with this type and name has already existed!');
+    throw new Error('A file with this type and name has already existed!');
   }
 
   mapTypeToListOfFiles[elementType].forEach((fileName) => {
