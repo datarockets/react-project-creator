@@ -16,9 +16,12 @@ program
 // The project elements generator
 program
   .command('generate [elementType] [elementName]')
+  .option('--ui', 'Generate a UI component')
+  .option('--layout', 'Generate a layout component')
+  .option('--page', 'Generate a page component')
   .description('Generate an element: component/container/model')
-  .action((elementType, elementName) => {
-    generateElement(elementType, elementName);
+  .action((elementType, elementName, { ui, layout, page }) => {
+    generateElement(elementType, elementName, { ui, layout, page });
   });
 
 program.parse(process.argv);

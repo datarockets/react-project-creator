@@ -1,9 +1,16 @@
 const fs = require('fs');
+const _  = require('lodash');
 
 const { checkPackageJson } = require('../helpers/checkPackageJson');
 
 const componentConstructor = require('./constructComponent');
 const containerConstructor = require('./constructContainer');
+
+const mapFlagToFolderName = {
+  ui: 'ui',
+  page: 'pages',
+  layout: 'layouts',
+};
 
 const mapTypeToConstructor = {
   component: componentConstructor.construct,
@@ -14,6 +21,39 @@ const mapTypeToListOfFiles = {
   component: componentConstructor.listOfFiles,
   container: containerConstructor.listOfFiles,
 };
+
+function getOption(elementSubType) {
+  const listOfOptions = _.toPairs(elementSubType).filter(([first, last]) => last);
+
+  if (_.isEmpty(listOfOptions)) {
+    return null;
+  }
+
+  if (_.size(listOfOptions) > 1) {
+    throw new Error('You can pass only one option!');
+  }
+
+  const flag = _
+    .chain(listOfOptions)
+    .head()
+    .head()
+    .value();
+
+  return mapFlagToFolderName[flag];
+}
+
+function constructPath(elementType, elementSubType) {
+  const currentDir    = process.cwd();
+  const path          = `${currentDir}/src/${elementType}s`;
+  const acceptOptions = (elementType === 'component');
+  const option        = getOption(elementSubType);
+
+  if (option && acceptOptions) {
+    return `${path}/${option}`;
+  } else {
+    return path;
+  }
+}
 
 function getFileContent(elementName, elementType) {
   const contentConstructor = mapTypeToConstructor[elementType];
@@ -41,11 +81,10 @@ function createFiles(elementName, elementType, path) {
   });
 }
 
-function generate(elementType, elementName) {
+function generate(elementType, elementName, elementSubType) {
   checkPackageJson();
 
-  const currentDir = process.cwd();
-  const path       = `${currentDir}/src/${elementType}s`;
+  const path       = constructPath(elementType, elementSubType);
   const content    = getFileContent(elementName, elementType);
 
   createFiles(elementName, elementType, path);
