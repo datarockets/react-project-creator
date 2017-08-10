@@ -23,6 +23,24 @@ react-up <project-name>
 
 ```
 
+## Element generator
+
+To generate a `component`, `container`, or `model` use the following command
+
+```bash
+
+react-up generate [component|container|model] <element-name>
+
+```
+
+To generate a `ui`, `layout`, or `page` component use the following flags
+
+```bash
+
+react-up generate component <element-name> [--ui|--layout|--page]
+
+```
+
 ## Project structure
 
 ```

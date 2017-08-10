@@ -9,8 +9,9 @@ function read(projectName) {
   return fs.readFileSync(`${projectName}/package.json`, 'utf8');
 }
 
-function update(packageObject) {
+function update(projectName, packageObject) {
   return Object.assign({}, packageObject, {
+    name: projectName,
     scripts: Object.assign({}, packageObject.scripts, SCRIPTS),
   });
 }
@@ -27,7 +28,7 @@ async function run(projectName) {
   return Promise.resolve(projectName)
     .then(read)
     .then(JSON.parse)
-    .then(update)
+    .then(update.bind(null, projectName))
     .then(JSON.stringify)
     .then(addIndentation)
     .then(write.bind(null, projectName));
