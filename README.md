@@ -19,7 +19,7 @@ To generate the basic project structure use the following command
 
 ```bash
 
-react-up <project-name>
+react-up new <project-name>
 
 ```
 
@@ -38,6 +38,14 @@ To generate a `ui`, `layout`, or `page` component use the following flags
 ```bash
 
 react-up generate component <element-name> [--ui|--layout|--page]
+
+```
+
+To generate redux `actions`, `reducers`, `sagas`, and `thunks`  use the following flags
+
+```bash
+
+react-up generate redux <element-name>
 
 ```
 

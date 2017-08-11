@@ -5,6 +5,7 @@ const { checkPackageJson } = require('../helpers/checkPackageJson');
 
 const componentConstructor = require('./constructComponent');
 const containerConstructor = require('./constructContainer');
+const reduxConstructor     = require('./constructRedux');
 
 const mapFlagToFolderName = {
   ui: 'ui',
@@ -81,16 +82,64 @@ function createFiles(elementName, elementType, path) {
   });
 }
 
-function generate(elementType, elementName, elementSubType) {
-  checkPackageJson();
+function constructReduxPaths(elementName) {
+  const currentDir = process.cwd();
+  const mainPath   = `${currentDir}/src/redux`;
 
-  const path       = constructPath(elementType, elementSubType);
-  const content    = getFileContent(elementName, elementType);
+  return [
+    {
+      folderPath: `${mainPath}/actions/${elementName}`,
+      constructIndex: reduxConstructor.constructAction,
+    },
+    {
+      folderPath: `${mainPath}/reducers/${elementName}`,
+      constructIndex: reduxConstructor.constructReducer,
+    },
+    {
+      folderPath: `${mainPath}/sagas/${elementName}`,
+      constructIndex: reduxConstructor.constructSaga,
+    },
+    {
+      folderPath: `${mainPath}/thunks/${elementName}`,
+      constructIndex: reduxConstructor.constructThunk,
+    },
+  ];
+}
+
+function generateComponent(elementType, elementName, elementSubType) {
+  const path    = constructPath(elementType, elementSubType);
+  const content = getFileContent(elementName, elementType);
 
   createFiles(elementName, elementType, path);
   writeBoilerplateToFile(elementName, path, content);
 
   console.log(`Done! You\'ll find this ${elementType} in src/${elementType}s/${elementName}`);
+}
+
+function generateReduxElements(elementName) {
+  const paths = constructReduxPaths(elementName);
+
+  paths.forEach(({ folderPath, constructIndex }) => {
+    try {
+      fs.mkdirSync(folderPath);
+    } catch (err) {
+      throw new Error('A redux file with this name has already existed!');
+    }
+
+    fs.writeFileSync(`${folderPath}/index.js`, constructIndex(elementName), 'utf8');
+  });
+
+  console.log(`Done! You\'ll find this redux ${elementName} in src/redux`);
+}
+
+function generate(elementType, elementName, elementSubType) {
+  checkPackageJson();
+
+  if (elementType === 'redux') {
+    generateReduxElements(elementName);
+  } else {
+    generateComponent(elementType, elementName, elementSubType);
+  }
 }
 
 exports.generateElement = generate;
