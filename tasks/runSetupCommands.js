@@ -28,11 +28,17 @@ async function setupDependencies() {
   await runCommand(devDependenciesAddCommand);
 }
 
+function setupFlow() {
+  console.log('Initialize flow');
+  return runCommand('yarn run flow init');
+}
+
 async function run(projectName) {
   await process.chdir(`./${projectName}`);
 
   await setupGit();
   await setupDependencies();
+  await setupFlow();
 
   await process.chdir(`..`);
 
