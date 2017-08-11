@@ -14,6 +14,7 @@ const SETUPS_LIST = [
   { fileName: '.editconfig', templateName: 'editconfig-template' },
   { fileName: '.eslintrc.js', templateName: 'eslintrc-template' },
   { fileName: '.stylelintrc.yml', templateName: 'stylelintrc-template' },
+  { fileName: '.eslintignore', templateName: 'eslintignore-template' },
 ];
 
 function addSetups(currentDir, projectName) {
