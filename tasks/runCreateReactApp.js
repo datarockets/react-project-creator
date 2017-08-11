@@ -9,6 +9,8 @@ async function runCreateReactApp(projectName) {
   await process.chdir(`./${projectName}`);
   await removeUselessFiles(projectName);
   await process.chdir(`..`);
+
+  console.log('Initialize yarn');
 }
 
 exports.runCreateReactApp = runCreateReactApp;
