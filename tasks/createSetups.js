@@ -2,13 +2,18 @@ const fs        = require('fs');
 const commander = require('commander');
 
 const CONFIGS_LIST = [
-  { fileName: 'webpack.config.js', configName: 'webpack.config.js' },
+  { fileName: 'webpack.config.dev.js', configName: 'webpack.config.dev.js' },
+  { fileName: 'webpack.config.prod.js', configName: 'webpack.config.prod.js' },
+  { fileName: 'patcher.js', configName: 'patcher.js' },
 ];
 
 const SETUPS_LIST = [
   { fileName: '.babelrc', templateName: 'babelrc-template' },
   { fileName: '.gitignore', templateName: 'gitignore-template' },
   { fileName: 'README.md', templateName: 'readme-template.md' },
+  { fileName: '.editconfig', templateName: 'editconfig-template' },
+  { fileName: '.eslintrc.js', templateName: 'eslintrc-template' },
+  { fileName: '.stylelintrc.yml', templateName: 'stylelintrc-template' },
 ];
 
 function addSetups(currentDir, projectName) {

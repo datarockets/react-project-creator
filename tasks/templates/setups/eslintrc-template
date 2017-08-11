@@ -1,0 +1,8 @@
+module.exports = {
+  extends: 'datarockets',
+
+  rules: {
+    'react/no-array-index-key': 'off',
+    'react/require-default-props': 'off',
+  },
+};
