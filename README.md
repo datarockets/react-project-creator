@@ -19,7 +19,7 @@ To generate the basic project structure use the following command
 
 ```bash
 
-react-up <project-name>
+react-up new <project-name>
 
 ```
 

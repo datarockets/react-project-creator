@@ -84,8 +84,8 @@ function createFiles(elementName, elementType, path) {
 function generate(elementType, elementName, elementSubType) {
   checkPackageJson();
 
-  const path       = constructPath(elementType, elementSubType);
-  const content    = getFileContent(elementName, elementType);
+  const path    = constructPath(elementType, elementSubType);
+  const content = getFileContent(elementName, elementType);
 
   createFiles(elementName, elementType, path);
   writeBoilerplateToFile(elementName, path, content);
