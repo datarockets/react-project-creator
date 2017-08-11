@@ -41,6 +41,14 @@ react-up generate component <element-name> [--ui|--layout|--page]
 
 ```
 
+To generate redux `actions`, `reducers`, `sagas`, and `thunks`  use the following flags
+
+```bash
+
+react-up generate redux <element-name>
+
+```
+
 ## Project structure
 
 ```
