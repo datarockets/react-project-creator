@@ -4,11 +4,6 @@ const fs        = require('fs');
 
 const { runCommand } = require('./helpers/runCommand');
 
-function setupYarn() {
-  console.log('Initialize yarn');
-  return runCommand('yarn init --yes');
-}
-
 function setupGit() {
   console.log('Initialize git');
   return runCommand('git init');
@@ -36,11 +31,11 @@ async function setupDependencies() {
 async function run(projectName) {
   await process.chdir(`./${projectName}`);
 
-  await setupYarn();
   await setupGit();
   await setupDependencies();
 
   await process.chdir(`..`);
+
   console.log('Ready!');
 }
 

@@ -11,10 +11,6 @@ function getSetupValues() {
   return { currentDir, frontProjectTemplatePath, reactProjectTemplatePath };
 }
 
-function createProjectDirectory(currentDir, projectName) {
-  fs.mkdirSync(`${currentDir}/${projectName}`);
-}
-
 function run(projectName) {
   const {
     currentDir,
@@ -26,7 +22,6 @@ function run(projectName) {
     throw new Error('You should provide a name for a project');
   }
 
-  createProjectDirectory(currentDir, projectName);
   createDirectoryContents(frontProjectTemplatePath, projectName, currentDir);
   createDirectoryContents(reactProjectTemplatePath, `${projectName}/src`, currentDir);
 }

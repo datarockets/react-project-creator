@@ -1,0 +1,36 @@
+extends:
+  - stylelint-config-datarockets
+
+rules:
+  property-no-unknown:
+    - true
+    - ignoreProperties:
+      - composes
+
+  color-no-hex: true
+
+  declaration-property-unit-blacklist:
+    /^(border(?!-radius))/:
+      - rem
+      - em
+      - "%"
+
+    /^[^-]{2}?.+/:
+      - px
+
+  declaration-property-unit-whitelist:
+    letter-spacing:
+      - em
+
+  unit-whitelist:
+    - px
+    - vh
+    - vw
+    - vmin
+    - vmax
+    - rem
+    - em
+    - "%"
+    - s
+    - ms
+    - deg
