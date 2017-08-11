@@ -5,7 +5,7 @@ const { checkPackageJson } = require('../helpers/checkPackageJson');
 
 const componentConstructor = require('./constructComponent');
 const containerConstructor = require('./constructContainer');
-const reduxConstructor     = require('./constructContainer');
+const reduxConstructor     = require('./constructRedux');
 
 const mapFlagToFolderName = {
   ui: 'ui',
@@ -120,11 +120,16 @@ function generateReduxElements(elementName) {
   const paths = constructReduxPaths(elementName);
 
   paths.forEach(({ folderPath, constructIndex }) => {
-    fs.mkdirSync(folderPath);
+    try {
+      fs.mkdirSync(folderPath);
+    } catch (err) {
+      throw new Error('A redux file with this name has already existed!');
+    }
+
     fs.writeFileSync(`${folderPath}/index.js`, constructIndex(elementName), 'utf8');
   });
 
-  console.log(`Done! You\'ll find this redux ${elementType} in src/${redux}`);
+  console.log(`Done! You\'ll find this redux ${elementName} in src/redux`);
 }
 
 function generate(elementType, elementName, elementSubType) {
