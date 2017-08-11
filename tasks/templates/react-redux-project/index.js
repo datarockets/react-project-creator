@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import GreetingPage from 'src/components/GreetingPage';
+import GreetingPage from './components/GreetingPage';
 
-render(GreetingPage, document.getElementById('root'));
+render(<GreetingPage />, document.getElementById('root'));

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './styles.css';
 
-export default  class GreetingPage extends Component {
+export default class GreetingPage extends Component {
   render = () => (
     <div className="main-container">
       <div className="header">
