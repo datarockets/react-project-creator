@@ -2,7 +2,8 @@ const commander = require('commander');
 const git       = require('simple-git');
 const fs        = require('fs');
 
-const { runCommand } = require('./helpers/runCommand');
+const { runCommand }           = require('./helpers/runCommand');
+const { dependenciesToString } = require('./helpers/dependenciesToString');
 
 function setupGit() {
   console.log('Initialize git');
@@ -15,10 +16,11 @@ async function setupDependencies() {
 
   const { dependencies, devDependencies } = JSON.parse(dependenciesListJson);
 
-  const dependenciesString     = dependencies.join(' ');
+  const dependenciesString     = dependenciesToString(dependencies);
+  console.log(dependenciesString);
   const dependenciesAddCommand = `yarn add ${dependenciesString}`;
 
-  const devDependenciesString     = devDependencies.join(' ');
+  const devDependenciesString     = dependenciesToString(devDependencies);
   const devDependenciesAddCommand = `yarn add --dev ${devDependenciesString}`;
 
   console.log('Add dependencies');
