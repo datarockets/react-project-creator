@@ -5,6 +5,8 @@ const listOfFiles = [
 
 function construct(componentName) {
   return `import React, { Component, PropTypes } from 'react';
+import rcm from 'src/utils/rcm';
+
 import styles from './styles.css';
 
 class ${componentName} extends Component {
@@ -17,7 +19,7 @@ class ${componentName} extends Component {
   }
 }
 
-export default ${componentName};`;
+export default rcm(styles)(${componentName});`;
 }
 
 exports.listOfFiles = listOfFiles;
