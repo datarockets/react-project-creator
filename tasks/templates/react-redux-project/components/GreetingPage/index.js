@@ -1,27 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './styles.css';
+import rcm from 'src/utils/rcm';
 
-export default class GreetingPage extends Component {
-  render = () => (
-    <div className="main-container">
-      <div className="header">
-        <div className="company-logo-container">
-          <div className="company-logo rounded-edges">
-            <span className="company-logo-alignment">
-              =>
-            </span>
+import logo from './logo.svg';
+
+import styles from './styles.css';
+class GreetingPage extends Component {
+  render() {
+    return (
+      <div styleName="main-container">
+        <div styleName="header">
+          <div styleName="company-logo-container">
+            <div styleName="company-logo rounded-edges">
+              <div styleName="company-logo-alignment">
+                =>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="wrapper">
-        <div className="mr-reactor-logo-wrapper">
-          <img src={logo} className="mr-reactor-logo" alt="mr-reactor-logo" />
+        <div styleName="wrapper">
+          <div styleName="mr-reactor-logo-wrapper">
+            <img src={logo} styleName="mr-reactor-logo" alt="mr-reactor-logo" />
+          </div>
+          <p styleName="greeting">
+            <span styleName="mr-reactor-span">Mr. Reactor</span> here to help you!
+          </p>
         </div>
-        <p className="greeting">
-          <span className="mr-reactor-span">Mr. Reactor</span> here to help you!
-        </p>
       </div>
-    </div>
-  );
+    );
+  }
 }
+
+export default rcm(styles)(GreetingPage);
