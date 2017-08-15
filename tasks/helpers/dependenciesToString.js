@@ -4,7 +4,11 @@ function dependenciesToString(dependencies) {
   return _
     .toPairs(dependencies)
     .reduce(
-      (accString, pair) => `${accString} ${pair.join('@')}`,
+      (accString, pair) => {
+        const moduleString = (pair[1] ? pair.join('@') : pair[0]);
+
+        return `${accString} ${moduleString}`;
+      },
       '',
     );
 }
